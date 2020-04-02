@@ -1,15 +1,15 @@
 const formatDate = require("date-fns/format");
 const store = require("../utils/store");
 
-const randomTimeA = require("../utils/randomTime")(2000, 7000, 500);
+const randomTimeA = require("../utils/randomTime")(4000, 10000, 500);
 const randomTimeB = require("../utils/randomTime")(1000, 3000, 200);
 
 module.exports = async function actionLikes(page, search) {
   await page.waitForSelector('input[placeholder="Pesquisar"]');
   await page.type('input[placeholder="Pesquisar"]', search.tag);
   await page.waitFor(2000);
-  await page.waitForSelector('a[href*="/explore/tags/"]');
-  await page.click('a[href*="/explore/tags/"]');
+  await page.waitForSelector('div[class*="fuqBx"]>a');
+  await page.click('div[class*="fuqBx"]>a');
   await page.waitForSelector('a[href*="/p/"]');
 
   const hrefs = await page.$$('a[href*="/p/"');
