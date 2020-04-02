@@ -23,7 +23,6 @@ const search = {
 
   //Login
   await login(page, auth);
-  await page.waitFor(5555555)
   //search
   await searchAndLike(page, search)
 
