@@ -12,5 +12,6 @@ module.exports = function randWithVariation(_min, _max, _variation) {
     if (seed > max) return min + (seed - max);
     else return seed;
   };
+
   return random;
 };
