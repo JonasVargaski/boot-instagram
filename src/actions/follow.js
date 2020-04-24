@@ -41,17 +41,19 @@ module.exports = async function follow(page, search) {
   const buttons = await page.$$('li button[class*="sqdOP"');
 
   let follow_count = 0;
+  let session_count = 0;
   const following = store.get("following", {});
 
   try {
     for await (let user of users) {
-      if (follow_count >= search.limit_like) {
+      if (session_count >= search.limit_like) {
         return
       }
 
       const user_name = await (await user.getProperty("title")).jsonValue();
 
       if (!following[user_name]) {
+        session_count++;
         await buttons[follow_count].click();
         await page.waitFor(randomTimeA());
         following[user_name] = formatDate(new Date(), "dd/MM/yyyy HH:mm:ss");
