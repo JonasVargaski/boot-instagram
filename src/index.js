@@ -4,13 +4,15 @@ const puppeteer = require("puppeteer-core");
 
 const auth = require("./config/auth");
 const { path } = require("./config/browser");
-const searchAndLike = require("./actions/serachAndLike");
 const login = require("./actions/login");
+const searchAndLike = require("./actions/searchAndLike");
+const follow = require("./actions/follow");
 
 const search = {
+  user: "nomePessoa",
   tag: "memesbr",
   follow: true,
-  limit_like: 10
+  limit_like: 30,
 };
 
 (async () => {
@@ -26,7 +28,9 @@ const search = {
   //Login
   await login(page, auth);
   //search
-  await searchAndLike(page, search);
+  // await searchAndLike(page, search);
+  //follow
+  await follow(page, search)
 
   await browser.close();
 })();
